@@ -1,0 +1,24 @@
+
+input {
+
+    /* text */
+    color: brown;
+    font-size: 16px;
+    text-align: center;
+
+    /* outline */
+    outline: none;
+    border: none;
+
+    /*background */
+    background: sandybrown;
+    min-width: 2ch;
+
+    max-width: calc(100% - 1ch);
+
+    padding: 0.5ch;
+    border-radius: 5px;
+
+    /* position */
+    margin: 10px 0 10px 0;
+}
