@@ -13,6 +13,7 @@ function Quote({id}) {
 
             <EditableText
                 id={'quote'}
+                className={'box-container'}
                 storageKey={'quote'}
                 placeholder={' '}
             />
@@ -60,7 +61,7 @@ function App() {
               <EditableText
                   id={'name-tag'}
                   storageKey={'name-tag'}
-                  placeholder={'MOHAN'}
+                  placeholder={'MON'}
               />
 
               <FullBody
@@ -79,13 +80,15 @@ function App() {
           {/* vibes, bottom left corner*/}
 
           <div id='vibes' className={'center-items box-container'}>
-              <>before quote</>
+              <>before er quote</>
               <Quote id={'quote-1'} />
               <>after quote</>
 
               <div id={'vibes-images'} className={'center-items box-container'}>
                   <>vibes images</>
-                  <div className="center-items square-image"></div>
+                  <div className="center-items square-image">
+                    <img src={'/src/assets/react.svghttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Ztbrx3By3hXfU8Z2tMZ70Mj5KEeOw5MLAQ&s'} alt={'vibe 1'}/>
+                  </div>
                   <div className="center-items square-image"></div>
                   <div className="center-items square-image"></div>
               </div>

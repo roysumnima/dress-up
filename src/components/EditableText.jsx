@@ -1,6 +1,10 @@
 import './EditableText.css'
 import {useState} from "react";
 
+// TODO:  store locally so doesnt disappear on refresh
+// TODO:  on enter, save the text
+
+
 function EditableText({ id, className, placeholder }) {
     const [text, setText] = useState(placeholder);
 

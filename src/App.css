@@ -20,7 +20,7 @@
 }
 
 .box-container {
-  background-color: salmon;
+  background-color: inherit;
 }
 
 .center-items {
@@ -67,6 +67,8 @@
   z-index: 2;
   position: relative;
 
+  background-color: inherit;
+
 }
 
 #vibes-images{
@@ -74,17 +76,21 @@
 
   margin: auto 5% 5% 5%;
 
-  height: 30%;
+  height: 50%;
   width: 80%;
 
   background: red;
 }
-
+ 
 .square-image {
-  height: 30%;
+  height: 80%;
   width: 80%;
   background: salmon;
   margin: 1%;
+}
+
+img {
+  background-color: inherit;
 }
 
 /*#root {*/
