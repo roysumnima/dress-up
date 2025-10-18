@@ -1,8 +1,9 @@
+import './FullBody.css'
 import PropTypes from "prop-types";
 
 function FullBody({id, className}) {
     return (
-        <div id={id} className={className}>
+        <div id={id} className={`${className} FullBody`}>
 
         </div>
     )

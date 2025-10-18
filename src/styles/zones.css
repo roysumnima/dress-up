@@ -1,0 +1,51 @@
+div #centerpiece {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: center;
+}
+
+div #centerpiece #name-tag {
+    height: 10%;
+    width: 100%;
+}
+
+div #name-tag  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div #centerpiece .FullBody {
+    height: 90%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#vibes {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#vibes-quote {
+    height: 20%;
+    width: 100%;
+}
+
+#vibes-images {
+    height: 80%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.vibes-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+

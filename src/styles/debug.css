@@ -1,0 +1,14 @@
+div{
+  opacity: 60%;
+}
+
+div:hover {
+  opacity: 100%;
+  border-style: dotted;
+  border-color: brown;
+}
+
+.view-container > * {
+  border: 1px dashed rgba(165, 42, 42, 0.3);
+}
+
