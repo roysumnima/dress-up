@@ -3,6 +3,7 @@ import './App.css'
 import EditableText from "./components/reusable/EditableText.jsx";
 import FaceCustomisation from "./components/zones/FaceCustomisation.jsx";
 import FullBody from "./components/zones/FullBody/FullBody.jsx";
+import DndImageUpload from "./components/reusable/DndImageUpload.jsx";
 
 
 function Quote({id}) {
@@ -58,7 +59,8 @@ function App() {
               <div id={'vibes-images'} className={''}>
                     
                   <div className="vibes-image">
-                    <img src={'https://images.pdimagearchive.org/collections/plain-home-talk/plainhometalkabo00foot_0440.jpg?width=1165&height=800'} className='image-fit' alt={'vibe 1'}/>
+                    <DndImageUpload />
+                    {/* <img src={'https://images.pdimagearchive.org/collections/plain-home-talk/plainhometalkabo00foot_0440.jpg?width=1165&height=800'} className='image-fit' alt={'vibe 1'}/> */}
                   </div>
 
                   <div className="vibes-image">
