@@ -40,11 +40,22 @@ div #centerpiece .FullBody {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+
+    align-items: center;
+    justify-content: center;
 }
 
-.vibes-images img {
+.vibes-image {
+    height: 100%;
+    width: 100%;
+    
+    overflow: hidden;
+}
+
+.image-fit {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 

@@ -22,11 +22,11 @@
 
     place-items: center; /* centers content in each cell */
 }
-
+/* 
 .image-fit {
   object-fit: contain;
   overflow: hidden;
   max-width: 100%;
   max-height: 100%;
   display: block;
-}
+} */
