@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function FullBody({id, className}) {
     return (
         <div id={id} className={`${className} FullBody`}>
-
+            <img src={"/body.png"} alt={"Full body placeholder"} className={'image-fit'}/>
         </div>
     )
 }

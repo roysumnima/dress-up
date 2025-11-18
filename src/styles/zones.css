@@ -52,11 +52,6 @@ div #centerpiece .FullBody {
     overflow: hidden;
 }
 
-.image-fit {
-    width: 100%;
-    height: 100%;
 
-    object-fit: cover;
-}
 
 
