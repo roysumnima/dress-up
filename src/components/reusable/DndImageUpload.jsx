@@ -5,24 +5,6 @@
 
 import React, { useState } from "react";
 
-const handleImageUrlDrop = async (url) => {
-    try {
-      console.log("Fetching image...");
-      const response = await fetch(url);
-      const blob = await response.blob();
-      if (!blob.type.startsWith("image/")) {
-        console.log("Dropped link is not an image.");
-        return;
-      }
-      const filename = url.split("/").pop() || "image";
-      const imageFile = new File([blob], filename, { type: blob.type });
-      console.log(imageFile);
-      console.log("");
-    } catch (err) {
-      console.log("Failed to fetch image from link.", err);
-    }
-  };
-
 function DndImageUpload() {
   const [text, setText] = useState("Drag and drop an image file here, or click to select a file");
   const [file, setFile] = useState(null);
@@ -32,11 +14,41 @@ function DndImageUpload() {
   const handleDragEnter = () => setIsDragging(true);
   const handleDragLeave = () => setIsDragging(false);
 
-  const handleDrop = (e) => {
+  const handleDrop = async(e) => {
   e.preventDefault();
   console.log("Drop event:", e);
-  const droppedFiles = Array.from(e.dataTransfer.files)
-  
+  const droppedFiles  = [];
+  Array.from(e.dataTransfer.items).forEach( item => {
+    if (item.kind === "file") {
+      const file = item.getAsFile();
+      droppedFiles.push(file);
+    }
+    if (item.kind === "string") {
+      item.getAsString(async (data) => {
+        console.log("Dropped string data:", data);
+        droppedFiles.push(data);
+      });
+     
+    }
+  });
+
+  console.log("All dropped files:", droppedFiles);
+  console.log(droppedFiles[0].type);
+  if (typeof droppedFiles[0] === "string") {
+    try {
+      const response = await fetch(droppedFiles[0]);
+      const blob = await response.blob();
+      const filename = droppedFiles[0].split("/").pop() || "image";
+      const imageFile = new File([blob], filename, { type: blob.type });
+      console.log("response:", response);
+      console.log("blob:", blob);
+      console.log("Fetched image file from URL:", imageFile);
+      setFile(imageFile);
+      setText("");
+    } catch (err) {
+      setText("Failed to fetch image from link.", err);
+    }
+  }
 
   if (droppedFiles.length !== 1) {
     setText(`${droppedFiles.length} file(s) dropped. Please drop a single file.`);
