@@ -9,7 +9,7 @@ function EditableText({ id, className, placeholder }) {
     const [text, setText] = useState(placeholder);
 
     return (
-        <div id={id} className={className}>
+        <div id={id} className={`${className} editable-text`}>
             <input
                 type={'text'}
                 placeholder={text}
