@@ -16,65 +16,72 @@ function DndImageUpload() {
 
   const handleDrop = async(e) => {
   e.preventDefault();
-  console.log("Drop event:", e);
-  const droppedFiles  = [];
-  Array.from(e.dataTransfer.items).forEach( item => {
+  setIsDragging(false);
+
+  let foundFile = false;
+
+  Array.from(e.dataTransfer.items).forEach(item => {
     if (item.kind === "file") {
       const file = item.getAsFile();
-      droppedFiles.push(file);
+      if (file && file.type.startsWith("image/")) {
+        setFile(file);
+        setText("");
+        foundFile = true;
+      }
     }
-    if (item.kind === "string") {
+
+    if (item.kind === "string" && item.type === "text/uri-list") {
       item.getAsString(async (data) => {
-        console.log("Dropped string data:", data);
-        droppedFiles.push(data);
+        try {
+          setText("Fetching image...");
+          const response = await fetch(data);
+          const blob = await response.blob();
+          if (!blob.type.startsWith("image/")) {
+            setText("Dropped link is not an image.");
+            return;
+          }
+          const filename = data.split("/").pop() || "image";
+          const imageFile = new File([blob], filename, { type: blob.type });
+          setFile(imageFile);
+          setText("");
+          foundFile = true;
+        } catch (err) {
+          setText("Failed to fetch image from link.");
+          console.error(err);
+        }
       });
-     
     }
+    setTimeout(() => {
+    if (!foundFile) {
+      setText("Please drop a single image file or image link.");
+    }
+    }, 100);
   });
 
-  console.log("All dropped files:", droppedFiles);
-  console.log(droppedFiles[0].type);
-  if (typeof droppedFiles[0] === "string") {
-    try {
-      const response = await fetch(droppedFiles[0]);
-      const blob = await response.blob();
-      const filename = droppedFiles[0].split("/").pop() || "image";
-      const imageFile = new File([blob], filename, { type: blob.type });
-      console.log("response:", response);
-      console.log("blob:", blob);
-      console.log("Fetched image file from URL:", imageFile);
-      setFile(imageFile);
-      setText("");
-    } catch (err) {
-      setText("Failed to fetch image from link.", err);
-    }
-  }
+  // if (droppedFiles.length !== 1) {
+  //   setText(`${droppedFiles.length} file(s) dropped. Please drop a single file.`);
+  //   if (droppedFiles.length > 1) console.log(droppedFiles, "Too many files dropped");
+  //   if (droppedFiles.length === 0) console.log("No files dropped", droppedFiles);
+  //   return;
+  // }
 
-  if (droppedFiles.length !== 1) {
-    setText(`${droppedFiles.length} file(s) dropped. Please drop a single file.`);
-    if (droppedFiles.length > 1) console.log(droppedFiles, "Too many files dropped");
-    if (droppedFiles.length === 0) console.log("No files dropped", droppedFiles);
-    return;
-  }
+  // const imageFiles = droppedFiles.filter(file => file.type.startsWith("image/"));
 
-  const imageFiles = droppedFiles.filter(file => file.type.startsWith("image/"));
+  // if (imageFiles.length !== 1) {
+  //   setText(`File type is: ${droppedFiles[0].type}. Please drop an image file.`);
+  //   console.log(droppedFiles, "Invalid file type");
+  //   return;
+  // }
 
-  if (imageFiles.length !== 1) {
-    setText(`File type is: ${droppedFiles[0].type}. Please drop an image file.`);
-    console.log(droppedFiles, "Invalid file type");
-    return;
-  }
-
-  setText("");
-  setFile(imageFiles[0]);
-  console.log(imageFiles[0], "File accepted.", e.dataTransfer, droppedFiles);
+  // setText("");
+  // setFile(imageFiles[0]);
+  // console.log(imageFiles[0], "File accepted.", e.dataTransfer, droppedFiles);
 };
+
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
-
-  
 
   return (
     <div
